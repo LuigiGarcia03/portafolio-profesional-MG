@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// frontend/src/App.tsx
+
+import { Layout } from './components/layout/Layout';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout>
+      {/* Aquí es donde vivirá el contenido de cada "página".
+        Por ahora, usamos divs con IDs para que los links del header funcionen.
+        Más adelante, esto será manejado por React Router.
+      */}
+
+      <section
+        id="inicio"
+        className="flex h-screen items-center justify-center bg-gray-200"
+      >
+        <h1 className="font-display text-5xl font-bold text-text-dark">
+          Hero Section (Próximamente)
+        </h1>
+      </section>
+
+      <section
+        id="servicios"
+        className="flex h-screen items-center justify-center"
+      >
+        <h2 className="font-display text-4xl font-bold text-text-dark">
+          Servicios (Próximamente)
+        </h2>
+      </section>
+
+      <section
+        id="portfolio"
+        className="flex h-screen items-center justify-center bg-gray-200"
+      >
+        <h2 className="font-display text-4xl font-bold text-text-dark">
+          Portfolio (Próximamente)
+        </h2>
+      </section>
+
+      <section
+        id="contacto"
+        className="flex h-screen items-center justify-center"
+      >
+        <h2 className="font-display text-4xl font-bold text-text-dark">
+          Contacto (Próximamente)
+        </h2>
+      </section>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
