@@ -2,7 +2,7 @@
 
 export default {
   plugins: {
-    '@tailwindcss/postcss': {}, // Tu paso es correcto
+    tailwindcss: {}, // <-- ¡ARREGLADO! Este es el plugin correcto de v3.
     autoprefixer: {},
   },
 };
