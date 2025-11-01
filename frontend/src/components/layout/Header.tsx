@@ -1,108 +1,54 @@
-// frontend/src/components/layout/Header.tsx
-
-import React, { useState } from 'react';
-
-// Icono de Menú (Hamburguesa)
-const MenuIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-    />
-  </svg>
-);
-
-// Icono de Cerrar (X)
-const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M6 18L18 6M6 6l12 12"
-    />
-  </svg>
-);
+// src/components/layout/Header.tsx
+import React from 'react';
 
 export const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    { href: '#inicio', label: 'Inicio' },
-    { href: '#servicios', label: 'Servicios' },
-    { href: '#portfolio', label: 'Proyectos' },
-    { href: '#contacto', label: 'Contacto' },
-  ];
-
   return (
-    <header className="bg-background-light sticky top-0 z-50 w-full shadow-md">
-      <nav className="container mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* Logo/Nombre */}
-        <a
-          href="#inicio"
-          className="font-display text-2xl font-bold text-accent-teal-dark"
-        >
-          Marcos García <span className="text-primary-yellow">.</span>
-        </a>
-
-        {/* Menú de Escritorio */}
-        <div className="hidden space-x-6 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="font-sans font-bold text-text-dark transition-colors hover:text-primary-teal"
-            >
-              {link.label}
+    // Usamos 'teal-medium' como en el ejemplo [cite: 300, 305]
+    <header className="w-full bg-teal-medium text-alabaster shadow-md">
+      <nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          
+          {/* Logo / Nombre */}
+          <div className="flex-shrink-0">
+            <a href="#" className="text-2xl font-bold tracking-tight">
+              Marcos García 
             </a>
-          ))}
-        </div>
+          </div>
 
-        {/* Botón de Menú Móvil */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-            className="text-text-dark"
-          >
-            {isMenuOpen ? (
-              <CloseIcon className="h-6 w-6" />
-            ) : (
-              <MenuIcon className="h-6 w-6" />
-            )}
-          </button>
+          {/* Navegación */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium hover:bg-teal-dark">
+                Home
+              </a>
+              <a href="#services" className="rounded-md px-3 py-2 text-sm font-medium hover:bg-teal-dark">
+                Servicios
+              </a>
+              <a href="#portfolio" className="rounded-md px-3 py-2 text-sm font-medium hover:bg-teal-dark">
+                Proyectos
+              </a>
+              <a href="#about" className="rounded-md px-3 py-2 text-sm font-medium hover:bg-teal-dark">
+                Acerca de Mí
+              </a>
+              <a href="#contact" className="rounded-md bg-lemon px-4 py-2 text-sm font-bold text-olive-dark shadow hover:bg-opacity-80">
+                Contactar 
+              </a>
+            </div>
+          </div>
+          
+          {/* Botón de Menú Móvil (funcionalidad pendiente) */}
+          <div className="-mr-2 flex md:hidden">
+            <button className="inline-flex items-center justify-center rounded-md p-2 text-alabaster hover:bg-teal-dark focus:outline-none">
+              <span className="sr-only">Abrir menú</span>
+              {/* Icono de Hamburguesa (puedes usar react-icons) */}
+              <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+          </div>
+
         </div>
       </nav>
-
-      {/* Menú Móvil (Desplegable) */}
-      {isMenuOpen && (
-        <div className="flex flex-col space-y-4 px-6 pb-6 md:hidden">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)} // Cierra el menú al hacer clic
-              className="block rounded-md py-2 text-center font-sans font-bold text-text-dark transition-colors hover:bg-primary-teal hover:text-text-light"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
     </header>
   );
 };

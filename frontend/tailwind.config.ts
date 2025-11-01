@@ -1,26 +1,26 @@
-import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
+// tailwind.config.ts
+import type { Config } from 'tailwindcss'
 
 export default {
-  // ¡LA CLAVE 'content' ES VITAL EN V3!
   content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        display: ['"Space Grotesk"', ...defaultTheme.fontFamily.sans],
-        sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-      },
       colors: {
-        'primary-teal': '#2EC4B6',
-        'primary-yellow': '#FFC83E',
-        'primary-gray': '#F6F7F8',
-        'dark-gray': '#6B7280',
-        'text-dark': '#1F2937',
-      },
+        // Tu paleta de DATOS CV
+        'alabaster': '#F5F5EC', // Blanco hueso
+        'lemon': '#EADD67',     // Amarillo limón
+        'mint': '#4DCCA9',      // Menta / Aguamarina
+        'platinum': '#D8D8D0',  // Gris claro
+        'olive-gold': '#9A9144', // Oliva dorado
+        'teal-medium': '#30B2A0', // Verde azulado medio
+        'taupe': '#AFABA2',      // Gris pardo
+        'olive-dark': '#6B643A',  // Oliva oscuro
+        'teal-dark': '#1E837B',   // Verde azulado oscuro
+      }
     },
   },
   plugins: [],
-} satisfies Config;
+} satisfies Config
