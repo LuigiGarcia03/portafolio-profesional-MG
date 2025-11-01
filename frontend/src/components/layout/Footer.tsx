@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
         <p className="text-center font-sans text-sm md:text-left">
           &copy; {currentYear} Marcos García Cruz. Todos los derechos reservados.
           <br />
-          Desarrollado con React, TypeScript y por tu Marcos Garcia.
+          Desarrollado con React, TypeScript y por Marcos Garcia.
         </p>
         <div className="mt-4 flex space-x-4 md:mt-0">
           <a
