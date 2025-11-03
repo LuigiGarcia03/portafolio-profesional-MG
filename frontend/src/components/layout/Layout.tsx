@@ -12,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     // 👇 ESTAS son las clases globales que aplican tu tema
     <div className="flex min-h-screen flex-col bg-background-light font-sans text-text-dark">
-      <Header />
+      <Header activeSection={''} />
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>

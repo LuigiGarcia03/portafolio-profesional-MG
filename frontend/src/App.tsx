@@ -28,7 +28,7 @@ function App() {
       <div className="flex-grow isolate">
         
         {/* ENCABEZADO */}
-        <Header />
+        <Header activeSection={''} />
 
         {/* CONTENIDO DE PÁGINA */}
         <main>
@@ -39,9 +39,9 @@ function App() {
             
             {/* Todas tus secciones van AQUÍ DENTRO */}
             <HeroSection />
+            <AboutSection /> 
             <ServicesSection />
             <PortfolioSection />
-            <AboutSection /> {/* Ajusta esto al orden que prefieras */}
             <TestimonialsSection />
             <ContactSection />
 
