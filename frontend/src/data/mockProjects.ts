@@ -4,7 +4,7 @@
 import type { Project } from '../types/Project';
 
 // Usaremos esta imagen de placeholder genérica
-const placeholderImg = 'https://via.placeholder.com/600x400.png?text=Proyecto+Destacado';
+const placeholderImg = 'https://i.blogs.es/4e5da4/github3/1366_2000.jpg';
 
 export const allProjects: Project[] = [
   {

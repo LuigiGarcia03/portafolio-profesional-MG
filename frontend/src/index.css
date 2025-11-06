@@ -8,7 +8,6 @@
 
 body {
   @apply bg-alabaster text-olive-dark; 
-  /* Establecemos el color de fondo 'alabaster' [cite: 294] 
-    y el color de texto 'olive-dark' [cite: 303] como base.
-  */
+  
 }
+/* --- FIN: Estilos de Scrollbar --- */

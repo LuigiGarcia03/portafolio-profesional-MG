@@ -19,11 +19,22 @@ export default {
         'olive-dark': '#6B643A',  // [cite: 354]
         'teal-dark': '#1E837B',   // [cite: 355]
       },
-      // --- AÑADE ESTO ---
-      animation: {
-        'spin-slow': 'spin 20s linear infinite',
+      keyframes: {
+        'fade-in-up': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(20px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
       },
-      // --- ---
+      animation: {
+        'spin-slow': 'spin 20s linear infinite', // La que ya teníamos
+        'fade-in-up': 'fade-in-up 0.5s ease-out forwards', // La nueva
+      },
     },
   },
   plugins: [],

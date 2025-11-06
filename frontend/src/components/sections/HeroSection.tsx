@@ -29,12 +29,11 @@ export const HeroSection: React.FC = () => {
           
           {/* Headline Principal */}
           <h1 className="font-display text-4xl font-bold tracking-tight text-text-dark sm:text-5xl md:text-6xl">
-            Desarrollo Tiendas Online que
+            Desarrollo Tiendas Online que <br></br>
             <span className="block text-primary-teal xl:inline">
-              {' '}
-              Convierte Visitantes
+              Convierte Visitantes <br></br>
             </span>
-             en Clientes
+              en Clientes
           </h1>
 
           {/* Sub-headline */}

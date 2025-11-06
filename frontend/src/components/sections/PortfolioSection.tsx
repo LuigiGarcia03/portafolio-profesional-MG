@@ -1,25 +1,25 @@
-// frontend/src/components/sections/PortfolioSection.tsx (¡MODIFICADO!)
+// frontend/src/components/sections/PortfolioSection.tsx (¡REFRACTORIZADO!)
 
 import React, { useState, useMemo } from 'react';
 import { allProjects } from '../../data/mockProjects';
-// 1. Importa el tipo 'Project' y el nuevo Modal
-// 1. Importa el tipo 'Project' y el nuevo Modal
 import type { Project, ProjectCategory } from '../../types/Project';
 import { ProjectModal } from '../common/ProjectModal';
 import { ProjectCard } from '../common/ProjectCard';
-// ... (imports de FilterButton y ProjectCard siguen igual)
+import { FilterButton } from '../common/FilterButton'; // ¡Importamos el botón rediseñado!
 
-// ... (const filterCategories sigue igual)
+// 1. Generamos las categorías dinámicamente
+const allCategories: ProjectCategory[] = [...new Set(allProjects.flatMap(p => p.categories))];
+const filterCategories: { label: string, value: ProjectCategory | 'all' }[] = [
+  { label: 'Todos', value: 'all' },
+  ...allCategories.map(cat => ({ label: cat, value: cat }))
+];
 
 export const PortfolioSection: React.FC = () => {
-  const [activeFilter] = useState<ProjectCategory | 'all'>('all');
-
-  // --- 2. Lógica de Estado del Modal ---
-  // Guardamos el *proyecto completo* seleccionado, o 'null' si no hay ninguno
+  // 2. ¡Arreglamos el bug! Añadimos el 'setActiveFilter'
+  const [activeFilter, setActiveFilter] = useState<ProjectCategory | 'all'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = useMemo(() => {
-    // ... (esta lógica no cambia)
     if (activeFilter === 'all') {
       return allProjects;
     }
@@ -28,44 +28,58 @@ export const PortfolioSection: React.FC = () => {
     );
   }, [activeFilter]);
 
-  // --- 3. Funciones para Abrir y Cerrar el Modal ---
-  
-  // Esta función se la pasamos a ProjectCard.
   const handleViewDetails = (id: number) => {
-    // Buscamos el proyecto en nuestros datos por su ID
     const projectToShow = allProjects.find((p) => p.id === id);
     if (projectToShow) {
       setSelectedProject(projectToShow);
     }
   };
 
-  // Esta función se la pasamos al Modal
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
 
   return (
-    // bg-gray-200 py-20 md:py-32
-    <section id="portfolio" className="bg-gray-200 py-20 md:py-32">
+    // 3. ¡SIN FONDO GRIS! Se integra con el 'alabaster' global
+    <section id="portfolio" className="py-20 md:py-32">
       <div className="container mx-auto max-w-6xl px-6">
         
-        {/* ... (El Título y la Barra de Filtros no cambian) ... */}
+        {/* Título de la Sección */}
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl font-extrabold text-olive-dark md:text-5xl">
+            Proyectos Destacados
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-olive-dark/80">
+            Una selección de mi trabajo en E-commerce, desarrollo web y más.
+          </p>
+        </div>
+
+        {/* 4. Barra de Filtros (Restaurada) */}
+        <div className="mb-12 flex flex-wrap justify-center gap-4">
+          {filterCategories.map((filter) => (
+            <FilterButton
+              key={filter.value}
+              label={filter.label}
+              onClick={() => setActiveFilter(filter.value)}
+              isActive={activeFilter === filter.value}
+            />
+          ))}
+        </div>
         
-        {/* Grid de Proyectos */}
+        {/* 5. Grid de Proyectos (con 'index' para animación) */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
-              // Ahora esta función abre el modal
-              onViewDetails={handleViewDetails} 
+              onViewDetails={handleViewDetails}
+              index={index} // Pasamos el índice para la animación escalonada
             />
           ))}
         </div>
       </div>
 
-      {/* --- 4. Renderizado Condicional del Modal --- */}
-      {/* Si 'selectedProject' NO es 'null', renderiza el modal */}
+      {/* El Modal (sin cambios, ya funciona bien) */}
       {selectedProject && (
         <ProjectModal 
           project={selectedProject} 

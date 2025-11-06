@@ -1,4 +1,4 @@
-// src/components/layout/Header.tsx
+// frontend/src/components/layout/Header.tsx 
 
 import React, { useState, useEffect } from 'react';
 import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi';
@@ -12,17 +12,23 @@ interface NavLink {
 }
 
 // --- Datos de Navegación (Fácil de actualizar) ---
+
 const navLinks: NavLink[] = [
-  { id: 'home', href: '#home', label: 'Home' },
-  { id: 'services', href: '#services', label: 'Servicios' },
+
+  { id: 'home', href: '#inicio', label: 'Home' },
+
+  { id: 'services', href: '#servicios', label: 'Servicios' },
+
   { id: 'portfolio', href: '#portfolio', label: 'Proyectos' },
+
   { id: 'about', href: '#about', label: 'Acerca de Mí' },
-  { id: 'contact', href: '#contact', label: 'Contactar', isButton: true },
+
+  { id: 'contact', href: '#contacto', label: 'Contactar', isButton: true },
 ];
 
 // --- Props del Componente ---
 interface HeaderProps {
-  // Pasaremos la sección activa para el efecto "píldora"
+
   activeSection: string;
 }
 
@@ -78,11 +84,11 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         
         {/* 1. Logo / Nombre */}
         <a 
-          href="#home" 
+          href="#inicio" // 
           className="text-2xl font-bold tracking-tight text-olive-dark"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          Marcos García {/* [cite: 56] */}
+          Marcos García 
         </a>
 
         {/* 2. Navegación de Escritorio (Desktop) */}
