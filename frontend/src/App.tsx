@@ -1,5 +1,4 @@
 // src/App.tsx
-import React from 'react';
 
 // --- Layout Components ---
 import { Header } from './components/layout/Header';
