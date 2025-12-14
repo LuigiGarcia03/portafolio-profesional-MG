@@ -1,152 +1,146 @@
-// frontend/src/components/layout/Header.tsx 
-
+// src/components/layout/Header.tsx
 import React, { useState, useEffect } from 'react';
-import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { Menu, X, Code2 } from 'lucide-react'; // Añadí Code2 aquí
+import logo from '../../assets/MG.ico'; // Asegúrate de que la ruta sea correcta
 
-// --- Tipos de Datos ---
-interface NavLink {
-  id: string;
-  href: string;
-  label: string;
-  isButton?: boolean;
-}
-
-// --- Datos de Navegación (Fácil de actualizar) ---
-
-const navLinks: NavLink[] = [
-
-  { id: 'home', href: '#inicio', label: 'Home' },
-
-  { id: 'services', href: '#servicios', label: 'Servicios' },
-
-  { id: 'portfolio', href: '#portfolio', label: 'Proyectos' },
-
-  { id: 'about', href: '#about', label: 'Acerca de Mí' },
-
-  { id: 'contact', href: '#contacto', label: 'Contactar', isButton: true },
-];
-
-// --- Props del Componente ---
 interface HeaderProps {
-
-  activeSection: string;
+  activeSection?: string; // Hacemos esta prop opcional
 }
 
-export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Efecto para detectar el scroll y cambiar el fondo del header
+  // 1. Detectar Scroll para el efecto de transparencia/degradado
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // 2. Función de Navegación Inteligente
+  const handleNavClick = (sectionId: string) => {
+    setIsMobileMenuOpen(false); // Cerrar menú móvil si está abierto
 
-  // --- Clases reutilizables para los enlaces ---
-  const linkBaseClass = "relative px-3 py-1.5 text-sm font-medium transition-colors duration-200";
-  
-  const getLinkClasses = (link: NavLink) => {
-    const isActive = activeSection === link.id;
-    
-    if (link.isButton) {
-      return "ml-4 bg-lemon text-olive-dark font-bold px-4 py-1.5 rounded-md shadow-sm hover:bg-opacity-80 transition-all duration-200";
+    // CASO A: Ya estamos en el Home ('/')
+    if (location.pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } 
+    // CASO B: Estamos en otra página (/sobre-mi, /contacto)
+    else {
+      // Navegamos al Home y pasamos el ID como "state" para que el Home sepa qué hacer
+      navigate('/', { state: { scrollTo: sectionId } });
     }
-
-    return `
-      ${linkBaseClass}
-      ${isActive
-        ? "text-teal-dark font-semibold" 
-        : "text-olive-dark/80 hover:text-olive-dark"}
-    `;
   };
 
-  // --- Clase para la píldora de fondo activo (Desktop) ---
-  const activePillClass = "absolute inset-0 bg-white/70 rounded-md -z-10";
+  // Definimos los links de navegación
+  const navLinks = [
+    { title: 'Inicio', id: 'hero' },
+    { title: 'Servicios', id: 'services' },
+    { title: 'Portfolio', id: 'portfolio' },
+    { title: 'Testimonios', id: 'testimonials' },
+  ];
 
   return (
-    <header 
-      className={`
-        sticky top-0 z-50 w-full transition-all duration-300
-        ${isScrolled 
-          ? "bg-gradient-to-r from-mint/90 to-lemon/80 backdrop-blur-sm shadow-md"
-          : "bg-transparent"}
-      `}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/90 backdrop-blur-md shadow-md py-4' // Fondo sólido/translucido al bajar
+          : 'bg-transparent py-6' // Fondo transparente arriba
+      }`}
     >
-      {/* --- Contenedor Principal de Navegación --- */}
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 flex items-center justify-between">
         
-        {/* 1. Logo / Nombre */}
-        <a 
-          href="#inicio" // 
-          className="text-2xl font-bold tracking-tight text-olive-dark"
-          onClick={() => setIsMobileMenuOpen(false)}
+        {/* LOGO MODIFICADO CON ICONO </> */}
+        <div 
+          className="flex items-center gap-2 cursor-pointer group"
+          onClick={() => handleNavClick('hero')}
         >
-          Marcos García 
-        </a>
-
-        {/* 2. Navegación de Escritorio (Desktop) */}
-        <div className="hidden items-center space-x-2 md:flex">
-          {navLinks.map((link) => (
-            <a key={link.id} href={link.href} className={getLinkClasses(link)}>
-              {/* Esta es la "píldora" que se mueve */}
-              {activeSection === link.id && !link.isButton && (
-                <span className={activePillClass} />
-              )}
-              {link.label}
-            </a>
-          ))}
+          <div className="p-2 bg-[#1E837B] rounded-lg group-hover:bg-[#16605a] transition-colors">
+            <Code2 className="h-6 w-6 text-white" />
+          </div>
+          <span className={`text-xl font-bold ${isScrolled || isMobileMenuOpen ? 'text-gray-900' : 'text-gray-900'}`}>
+            Marcos<span className="text-[#1E837B]">Dev</span>
+          </span>
         </div>
 
-        {/* 3. Botón de Menú Móvil (Mobile) */}
-        <div className="flex items-center md:hidden">
-          <button
-            onClick={toggleMobileMenu}
-            aria-label="Abrir menú"
-            className="rounded-md p-2 text-olive-dark/80 transition-colors hover:text-olive-dark focus:outline-none"
-          >
-            {isMobileMenuOpen ? (
-              <HiX className="h-6 w-6" />
-            ) : (
-              <HiOutlineMenuAlt3 className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* --- 4. Panel de Menú Móvil (Dropdown) --- */}
-      <div 
-        className={`
-          absolute w-full origin-top transform bg-alabaster shadow-xl transition-transform duration-300 ease-in-out md:hidden
-          ${isMobileMenuOpen ? "scale-y-100" : "scale-y-0 opacity-0"}
-        `}
-      >
-        <div className="flex flex-col space-y-1 px-4 pt-2 pb-4">
+        {/* NAVEGACIÓN DESKTOP */}
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.id} 
-              href={link.href} 
-              onClick={toggleMobileMenu} // Cierra el menú al hacer clic
-              className={`
-                block rounded-md px-3 py-2.5 text-base
-                ${link.isButton 
-                  ? "my-2 bg-lemon text-olive-dark font-bold shadow-sm" 
-                  : activeSection === link.id 
-                    ? "bg-lemon/50 text-teal-dark font-semibold"
-                    : "text-olive-dark/80 hover:bg-platinum"}
-              `}
+            <button
+              key={link.title}
+              onClick={() => handleNavClick(link.id)}
+              className="text-gray-600 hover:text-[#1E837B] font-medium transition-colors"
             >
-              {link.label}
-            </a>
+              {link.title}
+            </button>
           ))}
-        </div>
+
+          {/* Enlace directo a PÁGINAS INDEPENDIENTES */}
+          <Link 
+            to="/sobre-mi" 
+            className={`font-medium transition-colors ${
+              location.pathname === '/sobre-mi' ? 'text-[#1E837B] font-bold' : 'text-gray-600 hover:text-[#1E837B]'
+            }`}
+          >
+            Sobre Mí
+          </Link>
+
+          {/* BOTÓN CTA (La Excepción: Siempre lleva a /contacto) */}
+          <Link
+            to="/contacto"
+            className="px-6 py-2.5 bg-[#1E837B] text-white rounded-lg font-semibold hover:bg-[#16605a] transition-all shadow-lg hover:shadow-[#1E837B]/20"
+          >
+            Contactar
+          </Link>
+        </nav>
+
+        {/* MENÚ MÓVIL (Hamburguesa) */}
+        <button 
+          className="md:hidden text-gray-700"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* DROPDOWN MÓVIL */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-xl p-4 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <button
+              key={link.title}
+              onClick={() => handleNavClick(link.id)}
+              className="text-left py-2 text-gray-600 hover:text-[#1E837B] font-medium"
+            >
+              {link.title}
+            </button>
+          ))}
+          <Link 
+             to="/sobre-mi"
+             onClick={() => setIsMobileMenuOpen(false)}
+             className="text-left py-2 text-gray-600 hover:text-[#1E837B] font-medium"
+          >
+            Sobre Mí
+          </Link>
+          <Link
+            to="/contacto"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-center w-full py-3 bg-[#1E837B] text-white rounded-lg font-semibold"
+          >
+            Contactar
+          </Link>
+        </div>
+      )}
     </header>
   );
 };

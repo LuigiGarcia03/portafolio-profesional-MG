@@ -1,52 +1,44 @@
-// src/App.tsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// --- Layout Components ---
+// Layout Global
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { BackgroundDecor } from './components/layout/BackgroundDecor';
-import { HeroSection } from './components/sections/HeroSection';
-import { ServicesSection } from './components/sections/ServicesSection';
-import { PortfolioSection } from './components/sections/PortfolioSection';
-import { TestimonialsSection } from './components/sections/TestimonialsSection';
-import { ContactSection } from './components/sections/ContactSection';
-import { AboutSection } from './components/sections/AboutSection';
 
-
-
+// Páginas
+import HomePage from './pages/HomePage';
+import StoryPage from './pages/StoryPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
-    <div className="relative flex min-h-screen flex-col">
-      {/* 1. Decoración de Fondo (detrás de todo) */}
-      <BackgroundDecor />
-
-      {/* 2. Contenido Principal (con z-index positivo por defecto) */}
-      
-      <div className="flex-grow isolate">
+    // 1. Router envuelve TODO para que Header/Footer puedan usar links de navegación
+    <Router>
+      <div className="relative flex min-h-screen flex-col">
         
-        {/* ENCABEZADO */}
-        <Header activeSection={''} />
+        {/* Decoración de fondo fija */}
+        <BackgroundDecor />
 
-        {/* CONTENIDO DE PÁGINA */}
-        <main>
-          
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            
-            {/* Todas las SECCIONES*/}
-            <HeroSection />
-            <AboutSection /> 
-            <ServicesSection />
-            <PortfolioSection />
-            <TestimonialsSection />
-            <ContactSection />
+        <div className="flex-grow isolate">
+          {/* Header visible en todas las páginas */}
+          <Header activeSection={''} />
 
-          </div>
-        </main>
+          {/* Área dinámica: El contenido cambia según la URL */}
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/sobre-mi" element={<StoryPage />} />
+              <Route path="/contacto" element={<ContactPage />} /> 
+              <Route path="*" element={<HomePage />} />
+            </Routes>
+          </main>
+        </div>
+
+        {/* Footer visible en todas las páginas */}
+        <Footer />
+        
       </div>
-
-      {/* 3. PIE DE PÁGINA */}
-      <Footer />
-    </div>
+    </Router>
   );
 }
 
