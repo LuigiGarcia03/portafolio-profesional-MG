@@ -12,37 +12,38 @@ interface Milestone {
   icon: React.ReactNode;
 }
 
+// Datos actualizados basados en la trayectoria real (Ingeniería UAM -> .NET -> React)
 const milestones: Milestone[] = [
   {
     id: 1,
-    title: "Formación Fundamental",
-    role: "Ingeniero en Sistemas (UAM)",
-    date: "2010 - 2015", // Ajusta fechas reales si las tienes
-    description: "Graduación en la UAM. Aquí forjé mi lógica algorítmica y las bases sólidas de la ingeniería de software.",
+    title: "Fundamentos de Ingeniería",
+    role: "Lic. en Ingeniería (UAM)",
+    date: "Formación Académica", 
+    description: "Egresado de la Universidad Autónoma Metropolitana. Aquí adquirí las bases sólidas de algoritmia, lógica de programación y estructuras de datos que diferencian a un ingeniero de un programador convencional.",
     icon: <FaGraduationCap className="text-white text-xl" />,
   },
   {
     id: 2,
-    title: "Experiencia Corporativa",
-    role: "Desarrollador Backend .NET",
-    date: "2015 - 2020",
-    description: "Desarrollo de sistemas robustos y seguros utilizando C# y .NET Core. Aprendí la importancia de la arquitectura escalable.",
+    title: "Desarrollo Enterprise Backend",
+    role: "Especialista .NET & C#",
+    date: "Experiencia Corporativa",
+    description: "Trayectoria profesional desarrollando sistemas robustos en entornos corporativos utilizando C# y .NET. Me especialicé en arquitectura de software, seguridad de datos y patrones de diseño escalables.",
     icon: <FaServer className="text-white text-xl" />,
   },
   {
     id: 3,
-    title: "El Salto al Frontend",
-    role: "Especialización React",
-    date: "2020 - 2023",
-    description: "Impulsado por mi curiosidad, transicioné al ecosistema JavaScript moderno para crear experiencias de usuario dinámicas.",
+    title: "Evolución al Frontend Moderno",
+    role: "React & Ecosistema JavaScript",
+    date: "Transición Tecnológica",
+    description: "Impulsado por la innovación, trasladé la disciplina del backend al frontend. Dominé React, TypeScript y el desarrollo basado en componentes para crear interfaces de usuario dinámicas y de alto rendimiento.",
     icon: <FaReact className="text-white text-xl" />,
   },
   {
     id: 4,
-    title: "Presente & Futuro",
-    role: "Full Stack & E-commerce",
+    title: "Soluciones Full Stack",
+    role: "Arquitectura & E-commerce",
     date: "Actualidad",
-    description: "Hoy combino la ingeniería clásica con tecnología moderna (Next.js, TS) para crear tiendas online que realmente venden.",
+    description: "Hoy integro lo mejor de ambos mundos: la solidez de la ingeniería clásica con la velocidad del desarrollo web moderno, entregando soluciones e-commerce y aplicaciones web que impulsan negocios reales.",
     icon: <FaRocket className="text-white text-xl" />,
   }
 ];

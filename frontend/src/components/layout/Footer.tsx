@@ -79,8 +79,8 @@ export const Footer: React.FC = () => {
             <div className="mt-4 space-y-2 text-sm">
               <p className="flex items-center space-x-2 text-platinum/80">
                 <FaEnvelope className="h-4 w-4 text-lemon" />
-                <a href="mailto:garciacruzms690@gmail.com" className="hover:text-lemon transition-colors">
-                  garciacruzms690@gmail.com
+                <a href="mailto:marcos.garcia.web.dev@gmail.com" className="hover:text-lemon transition-colors">
+                  marcos.garcia.web.dev@gmail.com
                 </a>
               </p>
               <p className="flex items-center space-x-2 text-platinum/80">
@@ -91,14 +91,14 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer" 
                   className="hover:text-lemon transition-colors"
                 >
-                  +54 9 11 3658-7980
+                  +220 466 0376
                 </a>
               </p>
             </div>
             
             <div className="mt-6 flex space-x-4">
               <a 
-                href="https://github.com/tu-usuario"
+                href="https://github.com/LuigiGarcia03"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-platinum hover:text-lemon transition-colors"

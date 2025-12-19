@@ -44,7 +44,7 @@ const StoryPage: React.FC = () => {
                  </div>
                  <div className="flex items-center gap-2">
                     <FaCheckCircle className="text-[#EADD67]" />
-                    <span className="text-sm text-gray-700 font-medium">+10 Años Exp.</span>
+                    <span className="text-sm text-gray-700 font-medium">+20 Años Exp.</span>
                  </div>
               </div>
             </div>

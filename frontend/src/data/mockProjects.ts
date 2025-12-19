@@ -5,8 +5,18 @@ import type { Project } from '../types/Project';
 
 // Usaremos esta imagen de placeholder genérica
 const placeholderImg = 'https://i.blogs.es/4e5da4/github3/1366_2000.jpg';
+import tlvAiImage from '../assets/images/projects-img/tlv-ai-preview.png';
 
 export const allProjects: Project[] = [
+  {
+    id: 0, // ID 0 para asegurar que salga primero si se ordena, o simplemente por orden de array
+    title: 'Traductor Inteligente TLV AI',
+    description: 'Prototipo de traducción avanzada potenciado por Google Gemini. Utiliza Inteligencia Artificial para ofrecer traducciones contextuales y precisas en tiempo real.',
+    imageUrl: tlvAiImage,
+    categories: ['IA', 'React', 'Google Gemini'],
+    repoUrl: 'https://github.com/luigigarcia03/tlv-ai-prototipo', 
+    liveUrl: 'https://tlv-ai-prototipo.vercel.app/', 
+  },
   {
     id: 1,
     title: 'Tienda E-commerce "TechLoom"',

@@ -30,7 +30,7 @@ export const AboutSection: React.FC = () => {
               {/* Tarjeta flotante "Experiencia" */}
               <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg border-l-4 border-[#1E837B] hidden sm:block">
                 <p className="text-sm text-gray-500 font-medium">Trayectoria</p>
-                <p className="text-xl font-bold text-gray-900">+10 Años</p>
+                <p className="text-xl font-bold text-gray-900">+20 Años</p>
               </div>
             </div>
           </div>

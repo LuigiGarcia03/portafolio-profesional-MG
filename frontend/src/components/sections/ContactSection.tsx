@@ -1,6 +1,6 @@
 // frontend/src/components/sections/ContactSection.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,10 +18,14 @@ const contactSchema = z.object({
 type ContactFormInputs = z.infer<typeof contactSchema>;
 
 // Datos de contacto del documento DATOS CV
-const contactEmail = 'garciacruzms690@gmail.com';
+const contactEmail = 'marcos.garcia.web.dev@gmail.com';
 const contactLocation = 'Ciudad de México';
 
 export const ContactSection: React.FC = () => {
+  // Estados para feedback visual al usuario
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -31,18 +35,31 @@ export const ContactSection: React.FC = () => {
     resolver: zodResolver(contactSchema), // 3. Conectar Zod con el formulario
   });
 
-  // 4. Esta función SOLO se ejecuta si la validación pasa
+  // 4. Esta función maneja el envío real a Formspree
   const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
-    // Simulamos un envío de red
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log('Datos del formulario validados:', data);
-    
-    // PRÓXIMO PASO (Fase 6): Aquí es donde enviaremos 'data' a
-    // un servicio como Netlify Forms, Formspree, o nuestro propio backend.
-    
-    alert('¡Mensaje enviado! (Revisa la consola por ahora)');
-    reset(); // Limpia el formulario después del envío
+    setServerError(null);
+    setSuccessMsg(null);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xzdpzzwl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSuccessMsg('¡Gracias! Tu mensaje ha sido enviado correctamente. Te responderé a la brevedad.');
+        reset(); // Limpia el formulario después del envío exitoso
+      } else {
+        const errorData = await response.json();
+        // Formspree suele devolver errores detallados, pero usamos un mensaje genérico por seguridad
+        setServerError(errorData.error || 'Hubo un problema al enviar el mensaje. Por favor intenta nuevamente.');
+      }
+    } catch (error) {
+      setServerError('Error de conexión. Por favor verifica tu internet e intenta de nuevo.');
+    }
   };
 
   return (
@@ -62,6 +79,20 @@ export const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
           {/* Columna de Formulario */}
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6">
+            
+            {/* Mensajes de Feedback (Éxito o Error) */}
+            {successMsg && (
+              <div className="rounded-lg bg-green-100 p-4 text-center text-green-700 border border-green-200">
+                <p className="font-medium">{successMsg}</p>
+              </div>
+            )}
+            
+            {serverError && (
+              <div className="rounded-lg bg-red-100 p-4 text-center text-red-700 border border-red-200">
+                <p className="font-medium">{serverError}</p>
+              </div>
+            )}
+
             <FormInput
               label="Tu Nombre"
               type="text"
