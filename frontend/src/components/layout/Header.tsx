@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X, Code2 } from 'lucide-react'; // Añadí Code2 aquí
-
+// ojo
 interface HeaderProps {
   activeSection?: string; // Hacemos esta prop opcional
 }
