@@ -5,10 +5,17 @@
 export type ProjectCategory = 
   | 'E-commerce' 
   | 'React' 
+  | 'TypeScript'
+  | 'Tailwind CSS'
+  | 'Vite'
   | 'Node.js' 
   | 'Corporativo'
+  | 'Landing Page'
   | 'IA'
-  | 'Google Gemini';
+  | 'Google AI Studio'
+  | 'PHP'
+  | 'Next.js'
+  | 'Otro'; // 'Otro' para cualquier categoría que no encaje en las anteriores
 
 export interface Project {
   id: number;
