@@ -1,6 +1,6 @@
 // frontend/src/components/common/SEO.tsx
 import React from 'react';
-import { Helmet } from 'react-helmet'; // ✅ Cambiado a react-helmet
+import { Helmet } from 'react-helmet-async';
 
 // --- Datos Constantes ---
 // TODO: Reemplaza esto cuando tengas el dominio
