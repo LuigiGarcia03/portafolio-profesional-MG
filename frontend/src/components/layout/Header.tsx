@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X, Code2 } from 'lucide-react'; // Añadí Code2 aquí
-import logo from '../../assets/MG.ico'; // Asegúrate de que la ruta sea correcta
 
 interface HeaderProps {
   activeSection?: string; // Hacemos esta prop opcional
